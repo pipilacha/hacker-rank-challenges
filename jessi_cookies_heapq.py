@@ -40,10 +40,10 @@ def cookies(k, A:list):
     # Write your code here
     A.sort()
     sub = [x for x in A if x < k]
-       
-    sub2 = A[len(sub):]
+    cut = len(sub)
+            
     iterations = 0
-        
+    
     while len(sub) >= 2:
         sub.sort()
         least = sub[0]
@@ -55,23 +55,20 @@ def cookies(k, A:list):
             sub.append(result)
         else:
             if result == k:
-                sub2.insert(0, result)
+                A.insert(cut, result)
             else:
-                sub2.append(result)
+                A.append(result)
         iterations += 1
-
+    # print(sub)
     if len(sub) == 0:
         return iterations
-    
-    elif sub[0] >= k and len(sub) == 0:
+        
+    elif sub[0] < k and len(A) > cut:
         return iterations + 1
     
-    elif sub[0] < k and len(sub2) > 0:
-        return iterations + 1
-    
-    return - 1
+    return -1
 
-def cookies_with_heap(k, A:list): # only way i could pass exceution time probles in HR
+def cookies_with_heap(k, A:list): # only way i could pass exceution times in HR
     heapq.heapify(A)
 
     iterations = 0
@@ -91,7 +88,7 @@ arr2 = [1,2,3,9,10,12,1,2,3,9,10,12,1,2,3,9,10,12,1,2,3,9,10,12,1,2,3,9,10,12,1,
 # arr2 = [1,2,3,9,10,12]; k = 7
 arr = arr2[:]
 arr3 = arr2[:]
-print(len(arr))
+# print(len(arr))
 
 # start = datetime.datetime.now()
 # print('cookies3', cookies4(k, arr3))
